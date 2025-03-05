@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://eaw171xolye5"]
+
+[ext_resource type="Script" path="res://SCRIPTS/player.gd" id="1_g2bme"]
+[ext_resource type="Texture2D" uid="uid://c24qf0w23b6h2" path="res://ARTES/tankPLAYER.svg" id="2_4guhv"]
+[ext_resource type="PackedScene" uid="uid://d2mn3x7l3lsj" path="res://CENAS/espinho.tscn" id="3_uogi3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogsfk"]
+size = Vector2(51, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41ncv"]
+size = Vector2(77, 80)
+
+[sub_resource type="Curve2D" id="Curve2D_o5cmy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 130, 76, 0, 0, 0, 0, 410, 69, 0, 0, 0, 0, 124, 260, 0, 0, 0, 0, 415, 260, 0, 0, 0, 0, 112, 381, 0, 0, 0, 0, 16, 365, 0, 0, 0, 0, 132, 74)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_fusy3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1060, 65, 0, 0, 0, 0, 1058, 596)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_t3doh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 890, 62, 0, 0, 0, 0, 899, 576, 0, 0, 0, 0, 889, 65)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_fqbwd"]
+_data = {
+"points": PackedVector2Array(-44.5449, -40.9813, 44.5449, 40.9813, 304, 470, -78.3991, 44.5449, 78.3991, -44.5449, 552, 448, 33.8541, -48.1085, -33.8541, 48.1085, 666, 512, 55.2357, -7.12719, -55.2357, 7.12719, 554, 571, 42.7631, 7.12719, -42.7631, -7.12719, 422, 541, 55.2357, 60.5811, -55.2357, -60.5811, 272, 573, -19.5998, 153.235, 19.5998, -153.235, 124, 518, 0, 0, 0, 0, 302, 470)
+}
+point_count = 8
+
+[node name="inimigos_movimento" type="Node2D"]
+
+[node name="PLAYER" type="CharacterBody2D" parent="."]
+position = Vector2(605, 232)
+script = ExtResource("1_g2bme")
+metadata/_edit_group_ = true
+
+[node name="TankPlayer" type="Sprite2D" parent="PLAYER"]
+position = Vector2(-4, -4)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("2_4guhv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER"]
+position = Vector2(-6.5, -4)
+shape = SubResource("RectangleShape2D_ogsfk")
+
+[node name="Area2D" type="Area2D" parent="PLAYER" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER/Area2D"]
+position = Vector2(-5.5, -6)
+shape = SubResource("RectangleShape2D_41ncv")
+debug_color = Color(0.819374, 0.316551, 0.642979, 0.42)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_o5cmy")
+
+[node name="ESPINHO" parent="Path2D" instance=ExtResource("3_uogi3")]
+velocidade = 20
+
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_fusy3")
+
+[node name="ESPINHO" parent="Path2D2" instance=ExtResource("3_uogi3")]
+position = Vector2(1060, 65)
+velocidade = 50
+
+[node name="Path2D3" type="Path2D" parent="."]
+curve = SubResource("Curve2D_t3doh")
+
+[node name="ESPINHO" parent="Path2D3" instance=ExtResource("3_uogi3")]
+position = Vector2(890, 62)
+dir = -1
+velocidade = 100
+
+[node name="Path2D4" type="Path2D" parent="."]
+curve = SubResource("Curve2D_fqbwd")
+
+[node name="ESPINHO" parent="Path2D4" instance=ExtResource("3_uogi3")]
+position = Vector2(304, 470)
+dir = -1
+velocidade = 150

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1ft17orotllg"]
+
+[ext_resource type="Script" path="res://SCRIPTS/projeteis.gd" id="1_hyga6"]
+
+[node name="projeteis" type="Node2D"]
+script = ExtResource("1_hyga6")
+
+[node name="CANHAO" type="Polygon2D" parent="."]
+position = Vector2(568, 288)
+scale = Vector2(0.479167, 0.4375)
+offset = Vector2(-240, -128)
+polygon = PackedVector2Array(448, 64, 512, 64, 512, 192, 448, 192, 448, 144, 320, 144, 320, 256, 128, 256, 128, 0, 320, 0, 320, 96, 448, 96)
+
+[node name="Marker2D" type="Marker2D" parent="CANHAO"]
+position = Vector2(240, 0)

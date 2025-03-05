@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5v4elvrrh2rq"]
+
+[ext_resource type="Script" path="res://SCRIPTS/player.gd" id="1_s1bw0"]
+[ext_resource type="Texture2D" uid="uid://bid0yt4b6g54b" path="res://ARTES/estrelaESPINHO.svg" id="2_33p0p"]
+[ext_resource type="Script" path="res://SCRIPTS/marreta.gd" id="3_hy2ui"]
+[ext_resource type="PackedScene" uid="uid://dw5nt5qg4rhtk" path="res://CENAS/pedra.tscn" id="4_mnyhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bji74"]
+size = Vector2(79, 71)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v2qpa"]
+size = Vector2(24, 24)
+
+[sub_resource type="Animation" id="Animation_ixgfl"]
+resource_name = "ATAQUE"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MARRETA:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MARRETA/Area2D:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.2, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_d0qwo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MARRETA:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MARRETA/Area2D:monitorable")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0nns1"]
+_data = {
+"ATAQUE": SubResource("Animation_ixgfl"),
+"RESET": SubResource("Animation_d0qwo")
+}
+
+[node name="quebrar_pedras" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(132, 179)
+script = ExtResource("1_s1bw0")
+metadata/_edit_group_ = true
+
+[node name="EstrelaEspinho" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(47, 45)
+scale = Vector2(0.46, 0.445)
+texture = ExtResource("2_33p0p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(47.5, 47.5)
+shape = SubResource("RectangleShape2D_bji74")
+
+[node name="MARRETA" type="Polygon2D" parent="CharacterBody2D"]
+position = Vector2(66.57, 37.86)
+polygon = PackedVector2Array(-8, 8, 8, 8, 8, -40, 32, -40, 32, -64, -32, -64, -32, -40, -8, -40)
+script = ExtResource("3_hy2ui")
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D/MARRETA" groups=["ataque"]]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/MARRETA/Area2D"]
+position = Vector2(-2.57001, -80.86)
+shape = SubResource("RectangleShape2D_v2qpa")
+debug_color = Color(0.923582, 0.152196, 0.572422, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/MARRETA"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_0nns1")
+}
+
+[node name="pedra" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(489, 140)
+
+[node name="pedra2" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(544, 284)
+
+[node name="pedra3" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(665, 59)
+
+[node name="pedra4" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(705, 304)
+
+[node name="pedra5" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(787, 154)
+
+[node name="pedra6" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(575, 418)
+
+[node name="pedra7" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(810, 435)
+
+[node name="pedra8" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(694, 538)
+
+[node name="pedra9" parent="." instance=ExtResource("4_mnyhd")]
+position = Vector2(891, 291)

@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfa534qu1gvp"]
+
+[ext_resource type="Script" path="res://SCRIPTS/hud_coletaveis_camera.gd" id="1_01qcc"]
+[ext_resource type="Script" path="res://SCRIPTS/player.gd" id="2_ow1op"]
+[ext_resource type="Texture2D" uid="uid://c24qf0w23b6h2" path="res://ARTES/tankPLAYER.svg" id="3_ed2jv"]
+[ext_resource type="PackedScene" uid="uid://c4lw5nqbffryw" path="res://CENAS/moeda.tscn" id="4_7mmtg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_x2s0w"]
+font_size = 80
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwcxd"]
+size = Vector2(37, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ng67"]
+size = Vector2(74, 75)
+
+[node name="hud_coletaveis_camera" type="Node2D"]
+script = ExtResource("1_01qcc")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+offset_right = 1154.0
+offset_bottom = 125.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="HUD"]
+offset_left = 191.0
+offset_top = 4.0
+offset_right = 561.0
+offset_bottom = 114.0
+text = "PONTOS: "
+label_settings = SubResource("LabelSettings_x2s0w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelPONTOS" type="Label" parent="HUD"]
+offset_left = 563.0
+offset_top = 9.0
+offset_right = 701.0
+offset_bottom = 119.0
+text = "00 "
+label_settings = SubResource("LabelSettings_x2s0w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PLAYER" type="CharacterBody2D" parent="."]
+position = Vector2(309, 373)
+script = ExtResource("2_ow1op")
+metadata/_edit_group_ = true
+
+[node name="TankPlayer" type="Sprite2D" parent="PLAYER"]
+scale = Vector2(0.32, 0.34)
+texture = ExtResource("3_ed2jv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_wwcxd")
+
+[node name="Camera2D" type="Camera2D" parent="PLAYER"]
+
+[node name="Area2D" type="Area2D" parent="PLAYER" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER/Area2D"]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_8ng67")
+debug_color = Color(0.817317, 0.346347, 0.552827, 0.42)
+
+[node name="moeda" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(519, 347)
+
+[node name="moeda2" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(621, 571)
+
+[node name="moeda3" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(732, 498)
+
+[node name="moeda4" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(1045, 377)
+
+[node name="moeda5" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(418, 663)
+
+[node name="moeda6" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(104, 752)
+
+[node name="moeda7" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(-146, 661)
+
+[node name="moeda8" parent="." instance=ExtResource("4_7mmtg")]
+position = Vector2(1055, 718)

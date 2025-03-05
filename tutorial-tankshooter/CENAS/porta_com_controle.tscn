@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=3 uid="uid://boadnih7bwodi"]
+
+[ext_resource type="Script" path="res://SCRIPTS/porta_com_controle.gd" id="1_msrtp"]
+[ext_resource type="Script" path="res://SCRIPTS/player.gd" id="2_bgb2d"]
+[ext_resource type="Texture2D" uid="uid://c24qf0w23b6h2" path="res://ARTES/tankPLAYER.svg" id="3_sn4dt"]
+[ext_resource type="Texture2D" uid="uid://cteucpaart4ps" path="res://icon.svg" id="4_v6e4q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnti3"]
+size = Vector2(48, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvi2f"]
+size = Vector2(38, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixyu1"]
+size = Vector2(67, 60)
+
+[sub_resource type="Animation" id="Animation_6o02l"]
+resource_name = "ABRIRporta"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BOTAO:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.212305, 0.212305, 0.212305, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 90),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -1.5708, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4trfr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BOTAO:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_c4qg6"]
+resource_name = "fecharPORTA"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BOTAO:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.211765, 0.211765, 0.211765, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vjnc8"]
+_data = {
+"ABRIRporta": SubResource("Animation_6o02l"),
+"RESET": SubResource("Animation_4trfr"),
+"fecharPORTA": SubResource("Animation_c4qg6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_715xh"]
+size = Vector2(152.151, 148.898)
+
+[node name="porta_com_controle" type="Node2D"]
+script = ExtResource("1_msrtp")
+
+[node name="PORTA" type="StaticBody2D" parent="."]
+position = Vector2(600, 288)
+
+[node name="Poligon2D" type="Polygon2D" parent="PORTA"]
+color = Color(0, 0.763755, 0.572269, 1)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 128, -24, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PORTA"]
+position = Vector2(0, 52)
+shape = SubResource("RectangleShape2D_dnti3")
+
+[node name="PAREDES" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="PAREDES"]
+polygon = PackedVector2Array(624, 240, 576, 240, 576, 40, 936, 40, 936, 568, 576, 568, 576, 432, 624, 432, 624, 512, 888, 512, 888, 80, 624, 80)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PAREDES"]
+polygon = PackedVector2Array(576, 240, 624, 240, 624, 80, 888, 80, 888, 512, 624, 512, 624, 432, 576, 432, 576, 568, 936, 568, 936, 40, 576, 40)
+
+[node name="PLAYER" type="CharacterBody2D" parent="."]
+position = Vector2(237, 283)
+script = ExtResource("2_bgb2d")
+metadata/_edit_group_ = true
+
+[node name="TankPlayer" type="Sprite2D" parent="PLAYER"]
+position = Vector2(32, 30)
+scale = Vector2(0.325, 0.29)
+texture = ExtResource("3_sn4dt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER"]
+position = Vector2(32, 29.5)
+shape = SubResource("RectangleShape2D_mvi2f")
+
+[node name="Area2D" type="Area2D" parent="PLAYER" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER/Area2D"]
+position = Vector2(33.5, 30)
+shape = SubResource("RectangleShape2D_ixyu1")
+debug_color = Color(0.902313, 0.19568, 0.598159, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PORTA")
+libraries = {
+"": SubResource("AnimationLibrary_vjnc8")
+}
+
+[node name="BOTAO" type="Sprite2D" parent="."]
+position = Vector2(325, 67)
+scale = Vector2(0.414063, 0.382813)
+texture = ExtResource("4_v6e4q")
+
+[node name="Area2D" type="Area2D" parent="BOTAO"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BOTAO/Area2D"]
+position = Vector2(-1.20758, -1.30611)
+shape = SubResource("RectangleShape2D_715xh")
+debug_color = Color(0.61356, 0.536356, 0.0854089, 0.42)
+
+[connection signal="area_entered" from="BOTAO/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="BOTAO/Area2D" to="." method="_on_area_2d_area_exited"]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcac5cwdvr0s4"]
+
+[ext_resource type="Script" path="res://SCRIPTS/player.gd" id="1_ukj6k"]
+[ext_resource type="Texture2D" uid="uid://c24qf0w23b6h2" path="res://ARTES/tankPLAYER.svg" id="2_feoar"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1o4v"]
+size = Vector2(84, 89)
+
+[node name="movimento_4_direcoes" type="Node2D"]
+position = Vector2(1, 0)
+
+[node name="PLAYER" type="CharacterBody2D" parent="."]
+position = Vector2(215, 280)
+motion_mode = 1
+script = ExtResource("1_ukj6k")
+metadata/_edit_group_ = true
+
+[node name="TankPlayer" type="Sprite2D" parent="PLAYER"]
+position = Vector2(-2.99999, 2.00002)
+scale = Vector2(0.43, 0.425)
+texture = ExtResource("2_feoar")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PLAYER"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_y1o4v")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(375, 64, 639, 64, 639, 512, 383, 512, 383, 448, 575, 448, 575, 128, 375, 128)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/StaticBody2D"]
+polygon = PackedVector2Array(375, 64, 639, 64, 639, 512, 383, 512, 383, 448, 575, 448, 575, 128, 375, 128)

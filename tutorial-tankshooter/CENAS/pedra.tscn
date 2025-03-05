@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw5nt5qg4rhtk"]
+
+[ext_resource type="Texture2D" uid="uid://yawjrm0w3v56" path="res://ARTES/pedraBLOQUEADOR.svg" id="1_4k3kg"]
+[ext_resource type="Script" path="res://SCRIPTS/pedra.gd" id="1_602mh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7ppu"]
+size = Vector2(67, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgqw5"]
+size = Vector2(79, 74)
+
+[sub_resource type="Animation" id="Animation_ntafj"]
+resource_name = "pancada"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PedraBloqueador:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.466181, 0.466181, 0.466181, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rderb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PedraBloqueador:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pfvp6"]
+resource_name = "destruir"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PedraBloqueador:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23er0"]
+_data = {
+"RESET": SubResource("Animation_rderb"),
+"destruir": SubResource("Animation_pfvp6"),
+"pancada": SubResource("Animation_ntafj")
+}
+
+[node name="pedra" type="StaticBody2D"]
+script = ExtResource("1_602mh")
+
+[node name="PedraBloqueador" type="Sprite2D" parent="."]
+position = Vector2(35, 33)
+scale = Vector2(0.34, 0.325)
+texture = ExtResource("1_4k3kg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35.5, 33)
+shape = SubResource("RectangleShape2D_v7ppu")
+
+[node name="Area2D" type="Area2D" parent="." groups=["obstaculo"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(35.5, 33)
+shape = SubResource("RectangleShape2D_jgqw5")
+debug_color = Color(0.951077, 9.62615e-08, 0.565447, 0.42)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_23er0")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
