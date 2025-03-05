@@ -45,10 +45,17 @@ Um nó importante para fazer o objeto atirador é o "Marker2D", é um ponto que 
 O movimento da bala é feito incrementando a posição dentro de "_process()". Combinando o valor de velocidade com a propriedade "transform.x" temos o movimento com relação ao ângulo de rotação. Usei o sinal screen_exited() do VisibleOnScreenNotifier2D para excluir a instância.
 
 ### Criando a instância da bala
-Na cena do objeto que atira precisamos carregar a bala no início dentro de uma variável(ou constante) usando a função "preload()", nele colocamos o caminho da cena. Para criar a instância no momento certo é preciso fazer uma nova variável com o método .instantiate() da cena precarregada. Depois precisamos adicinar a cena raiz com get_tree().root.add_child(). Depois disso definimos a posição inicial da bala atribuindo a posição global para a posição do "Marker2D".
+Na cena do objeto que atira precisamos carregar a bala no início dentro de uma variável(ou constante) usando a função "preload()", nele colocamos o caminho da cena. Para criar a instância no momento certo é preciso fazer uma nova variável com o método .instantiate() da cena precarregada. Depois precisamos adicinar a cena raiz com get_tree().root.add_child(). Depois disso definimos a posição inicial da bala atribuindo a posição global para a posição do "Marker2D". Também aplicamos a rotação do objeto atirador para o a instância da bala.
 
 ## Obstáculos quebráveis
+Obstáculos como pedras rígidas são uma mecânica que serve para impedir o movimento do jogador no mapa. As "pedras" são corpos físicos que resistem a alguns ataques até serem destruídas. A base para criar essa mecância é a detecção de "áreas".
 ![sprite com martelo batendo em cubos e quebrando](https://github.com/GaburaDigital/TutorialGodot2Dtopdown/blob/main/gifs%20EXEMPLOS/quebrarPedra.gif)
+
+### Area2D
+A pedra é feita em uma cena própria, ela é feita com um "StaticBody2D" para impedir o movimento na colisão com o CharacterBody2D. O nó importante para a interação é o "Area2D", para usar também precisamos de um "CollisionShape2D" que é a marcação da região. O Area2D pode disparar um sinal quando outra entra ou sai, ou seja com ele vamos detectar se área do martelo entra nele.
+
+### Configurando os Grupos de Colisão
+Na cena de teste temos um "Player" com uma Area2D que precisa ser configurado. Eu(gabura) acho mais comodo criar grupos de areas do que decorar camadas e layers. Então a area da marreta colocarei colacarei no grupo "ataque".
 
 ## Porta com acionamento remoto
 ![Sprite apertando botão que gira portão e abre passagem](https://github.com/GaburaDigital/TutorialGodot2Dtopdown/blob/main/gifs%20EXEMPLOS/portaControle.gif)
