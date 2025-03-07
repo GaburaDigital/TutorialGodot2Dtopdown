@@ -48,7 +48,7 @@ A detecção de colisão entre dois corpos é configurada na região "collision"
 
 
 ## Atirar Projéteis
-Essa mecânica "atira" coisas, pode ser usada tanto para ataque do personagem principal como de inimigos. O mais importante dessa parte é saber como "criar instâncias" dentro da cena. Esse teste de exemplo usa 2 cenas, um com um canhão que aponta na direção do mouse e outro que é a "bala" que será gerada como instância da cena do canhão.
+Essa mecânica "atira" coisas, pode ser usada tanto para ataque do personagem principal como de inimigos. O mais importante dessa parte é saber como "criar instâncias" dentro da cena. Esse teste de exemplo usa 2 cenas, um com um canhão que aponta na direção do mouse e outro que é a "bala" que será gerada como instância da cena do canhão. Escolhi fazer como cena de teste o canhão pois é fácil de replicar esse modo de fazer em qualquer jogo que "atira algo" 2D.
 ![canhão branco atirando balas roxas que somem ao tocar na borda](https://github.com/GaburaDigital/TutorialGodot2Dtopdown/blob/main/gifs%20EXEMPLOS/projeteis.gif)
 
 Execute a cena projeteis:
@@ -63,7 +63,7 @@ A bala foi feita em uma cena separada da cena de teste. Para fazer a ela utilize
 
 
 ### Marker2D
-Na cena de teste de atirar projéteis, fiz o desenho de um canhão com o "polygon2D". Um nó importante para fazer "canhão" que vai atirar as balas é o "Marker2D", é um ponto que marcamos no desenho(no viewport) para inidicar onde vai ser criado algo. Nesse exemplo usei na ponta do canhão. Ele tem que ser colocado como filho do nó para que seu movimento seja relativo ao do "pai".
+Na cena de teste de atirar projéteis, fiz o desenho de um canhão com o "polygon2D". Um nó importante para fazer "canhão" que vai atirar as balas é o "Marker2D", um ponto que marcamos no desenho(no viewport) para inidicar onde vai ser criado algo. Nesse exemplo usei na ponta do canhão. Ele tem que ser colocado como filho do nó para que seu movimento seja relativo ao do "pai".
 
 ![Marker2D na ponta do canhão](https://github.com/GaburaDigital/TutorialGodot2Dtopdown/blob/main/gifs%20EXEMPLOS/Marker2DCanhao.png)
 
